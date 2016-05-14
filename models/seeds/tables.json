@@ -1,0 +1,21 @@
+[{
+  "library": "L1",
+  "floor": "F1",
+  "room": "R1"
+}, {
+  "library": "L1",
+  "floor": "F1",
+  "room": "R2"
+}, {
+  "library": "L1",
+  "floor": "F1",
+  "room": "R3"
+}, {
+  "library": "L2",
+  "floor": "F1",
+  "room": "R1"
+}, {
+  "library": "L2",
+  "floor": "F1",
+  "room": "R2"
+}]
