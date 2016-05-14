@@ -1,3 +1,4 @@
+require('dotenv').config();
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://' + process.env.MONGO_HOSTNAME + '/get_table');
 var Table = require('./models/table');
@@ -19,6 +20,8 @@ seeds.forEach(function (seed, index) {
                     console.log('seeded', seed);
                 }
             });
+        } else {
+            console.log('existing', seed);
         }
     });
 });
