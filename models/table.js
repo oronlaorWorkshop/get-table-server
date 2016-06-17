@@ -5,8 +5,15 @@ var tableSchema = new Schema({
     library:  String,
     floor: String,
     room:   String,
-    vacant: Boolean,
-    user: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+    vacant: {type: Boolean, default: true},
+    reserved_to: { type: Schema.Types.ObjectId, ref: 'User' }
+});
+
+tableSchema.pre('save', function (next) {
+    if (this.reserved_to) {
+        this.vacant = false;
+    }
+    next();
 });
 
 var Table = mongoose.model('Table', tableSchema);

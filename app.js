@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://' + process.env.MONGO_HOSTNAME + '/get_table');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var table = require('./routes/table');
 
 var app = express();
@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', user);
 app.use('/table', table);
 
 // catch 404 and forward to error handler

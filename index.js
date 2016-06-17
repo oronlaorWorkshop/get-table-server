@@ -47,6 +47,10 @@ app.get('', function (req, res) {
 app.listen(3000);
 
 
+// import urllib.request
+// with urllib.request.urlopen('http:/table-app.com/user') as response:
+// html = response.read()
+
 // hostname: table-app.com
 // routes:
 //   user:
