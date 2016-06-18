@@ -7,12 +7,6 @@ var User = require('../models/user');
 - get vacant - tables by lib, floor?, room?
 - put reserve (table_id, user_id)
  */
- router.use(function(req, res, next) {
-   res.header("Access-Control-Allow-Origin","*");
-   res.header("Access-Control-Allow-Methods","GET, POST, PUT");
-   res.header("Access-Control-Allow-Headers","Content-Type");
-     next();
- });
 
 router.get('/', function(req, res, next) {
 
@@ -30,7 +24,7 @@ router.get('/', function(req, res, next) {
 router.get('/vacant', function(req, res, next) {
 
   var queryParams = {};
-
+  
   queryParams.vacant = {$ne: false};
 
   if (!req.query.library) {
