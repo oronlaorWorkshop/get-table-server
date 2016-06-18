@@ -88,7 +88,7 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
 
 });
 
-router.put('/:table_id/occupy', function (req, res, next) {
+router.post('/:table_id/occupy', function (req, res, next) {
 
     Table.findById(req.params.table_id, function (err, table) {
       if (err) {
@@ -104,7 +104,7 @@ router.put('/:table_id/occupy', function (req, res, next) {
     });
 });
 
-router.put('/:table_id/free', function (req, res, next) {
+router.post('/:table_id/free', function (req, res, next) {
 
     Table.findById(req.params.table_id, function (err, table) {
       if (err) {
