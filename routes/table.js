@@ -88,6 +88,38 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
 
 });
 
+router.put('/:table_id/occupy', function (req, res, next) {
+
+    Table.findById(req.params.table_id, function (err, table) {
+      if (err) {
+        throw err;
+      }
+      table.vacant = false;
+      table.save(function (err) {
+        if (err) {
+          throw err;
+        }
+        res.send();
+      });
+    });
+});
+
+router.put('/:table_id/free', function (req, res, next) {
+
+    Table.findById(req.params.table_id, function (err, table) {
+      if (err) {
+        throw err;
+      }
+      table.vacant = true;
+      table.save(function (err) {
+        if (err) {
+          throw err;
+        }
+        res.send();
+      });
+    });
+});
+
 router.get('/:id', function(req, res, next) {
 
   Table.findOne({_id: req.params.id}, function (err, table) {
