@@ -5,6 +5,7 @@ var tableSchema = new Schema({
     library:  String,
     floor: String,
     room:   String,
+    number: String,
     vacant: {type: Boolean, default: true},
     reserved_to: { type: Schema.Types.ObjectId, ref: 'User' }
 });

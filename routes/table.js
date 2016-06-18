@@ -4,7 +4,7 @@ var Table = require('../models/table');
 var User = require('../models/user');
 
 /*
-- get vacant - tables by lib, floor?, room?
+- get vacant - tables by lib, floor?, room? number?
 - put reserve (table_id, user_id)
  */
 
@@ -42,6 +42,10 @@ router.get('/vacant', function(req, res, next) {
     queryParams.room = req.query.room;
   }
 
+  if (req.query.number) {
+    queryParams.number = req.query.number;
+  }
+
   Table.find(queryParams, function (err, results) {
 
     if (err) {
@@ -74,6 +78,10 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
       Table.findById(req.params.table_id, function (err, table) {
         if (err) {
           throw err;
+        }
+        if (table.vacant.equals(false)) {
+          res.status(403).send('table is not vacant');
+          return;
         }
         table.reserved_to = user;
         table.save(function (err) {
