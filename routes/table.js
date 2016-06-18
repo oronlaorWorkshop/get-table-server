@@ -4,7 +4,7 @@ var Table = require('../models/table');
 var User = require('../models/user');
 
 /*
-- get vacant - tables by lib, floor?, room? number?
+- get vacant - tables by lib, floor?, room? number? (number is serial for tables
 - put reserve (table_id, user_id)
  */
 
