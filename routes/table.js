@@ -3,6 +3,9 @@ var router = express.Router();
 var Table = require('../models/table');
 var User = require('../models/user');
 
+var cors = require('cors');
+router.use(cors());
+
 /*
 - get vacant - tables by lib, floor?, room? number?
 - put reserve (table_id, user_id)
@@ -24,7 +27,7 @@ router.get('/', function(req, res, next) {
 router.get('/vacant', function(req, res, next) {
 
   var queryParams = {};
-  
+
   queryParams.vacant = {$ne: false};
 
   if (!req.query.library) {
