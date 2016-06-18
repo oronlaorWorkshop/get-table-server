@@ -11,6 +11,7 @@ var User = require('../models/user');
    res.header("Access-Control-Allow-Origin","*");
    res.header("Access-Control-Allow-Methods","GET, POST, PUT");
    res.header("Access-Control-Allow-Headers","Content-Type");
+   res.header("Content-Type", "application/json; charset=utf-8");
      next();
  });
 
