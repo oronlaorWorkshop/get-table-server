@@ -69,6 +69,7 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
     if (!user) {
       res.status(400).send('user cannot be found');
     }
+    res.send("debug1, params are: " + JSON.stringify(req.params));
 
     Table.find({reserved_to: user}, function (err, tables) {
       if (err) {
@@ -79,6 +80,7 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
         res.status(403).send('user already reserved another table');
         return;
       }
+      res.send("debug2");
       Table.findById(req.params.table_id, function (err, table) {
         if (err) {
           //throw err;
@@ -88,6 +90,8 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
           res.status(403).send('table is not vacant');
           return;
         }
+        res.send("debug3");
+
         table.reserved_to = user;
         table.save(function (err) {
           if (err) {
@@ -99,6 +103,7 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
       });
     });
   });
+  res.send("debug");
 
 });
 
