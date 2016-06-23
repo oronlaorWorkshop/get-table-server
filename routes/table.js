@@ -60,7 +60,7 @@ router.get('/vacant', function(req, res, next) {
 router.put('/:table_id/reserve/:user_id', function (req, res, next) {
 
   User.findById(req.params.user_id, function (err, user) {
-
+    console.log("debug:1");
     if (err) {
       //throw err;
       res.send("error 1: " + JSON.stringify(err));
@@ -71,7 +71,10 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
     }
 
     Table.find({reserved_to: user}, function (err, tables) {
-      if (err) throw err;
+      if (err) {
+        //throw err;
+        res.send("error 4: " + JSON.stringify(err));
+      }
       if (tables.length) {
         res.status(403).send('user already reserved another table');
         return;
@@ -79,7 +82,7 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
       Table.findById(req.params.table_id, function (err, table) {
         if (err) {
           //throw err;
-          res.send("error 1: " + JSON.stringify(err));
+          res.send("error 2: " + JSON.stringify(err));
         }
         if (table.vacant.equals(false)) {
           res.status(403).send('table is not vacant');
@@ -89,7 +92,7 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
         table.save(function (err) {
           if (err) {
             //throw err;
-            res.send("error 1: " + JSON.stringify(err));
+            res.send("error 3: " + JSON.stringify(err));
           }
           res.send();
         });
