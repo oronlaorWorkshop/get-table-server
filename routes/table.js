@@ -103,8 +103,6 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
       });
     });
   });
-  res.send("debug");
-
 });
 
 router.post('/:table_id/occupy', function (req, res, next) {
