@@ -69,8 +69,6 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
     if (!user) {
       res.status(400).send('user cannot be found');
     }
-    res.send("debug1, params are: " + JSON.stringify(req.params));
-
     Table.find({reserved_to: user}, function (err, tables) {
       if (err) {
         //throw err;
