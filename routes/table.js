@@ -83,8 +83,6 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
           //throw err;
           res.send("error 2: " + JSON.stringify(err));
         }
-        res.send("debug2, table is: " + JSON.stringify(table));
-
         if (table.vacant.equals(false)) {
           res.status(403).send('table is not vacant');
           return;
