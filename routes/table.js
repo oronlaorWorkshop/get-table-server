@@ -23,6 +23,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/vacant', function(req, res, next) {
 
+  res.send("debug 1: ");
   var queryParams = {};
   
   queryParams.vacant = {$ne: false};
