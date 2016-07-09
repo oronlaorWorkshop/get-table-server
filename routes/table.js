@@ -48,6 +48,7 @@ router.get('/vacant', function(req, res, next) {
 
   var queryObject = Table.find(queryParams);
   queryObject.exec(function (err, results) {
+    res.send("debug 2: results: " + JSON.stringify(results));
 
     if (err) {
       res.send("debug 1: error: " + JSON.stringify(err));
