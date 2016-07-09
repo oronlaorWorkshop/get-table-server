@@ -60,7 +60,6 @@ router.get('/vacant', function(req, res, next) {
     res.json(results);
 
   });
-  res.send('after exec');
 });
 
 router.put('/:table_id/reserve/:user_id', function (req, res, next) {
