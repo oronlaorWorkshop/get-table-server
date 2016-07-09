@@ -45,8 +45,11 @@ router.get('/vacant', function(req, res, next) {
   if (req.query.number) {
     queryParams.number = req.query.number;
   }
-try{
-  Table.find(queryParams, function (err, results) {
+
+  var queryObject = Table.find(queryParams);
+  res.send('after find');
+  return;
+  queryObject.exec(function (err, results) {
 
     if (err) {
       res.send("debug 1: error: " + JSON.stringify(err));
@@ -58,11 +61,7 @@ try{
     res.json(results);
 
   });
-}
-  catch(err){
-    res.send(err);
-  }
-
+  res.send('after exec');
 });
 
 router.put('/:table_id/reserve/:user_id', function (req, res, next) {
