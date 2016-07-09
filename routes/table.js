@@ -27,7 +27,6 @@ router.get('/vacant', function(req, res, next) {
   
   queryParams.vacant = {$ne: false};
 
-  res.send("debug 1: query is: " + JSON.stringify(req.query));
   if (!req.query.library) {
     res.status(400).send('\'library\' parameter is missing');
     return;
@@ -52,6 +51,8 @@ router.get('/vacant', function(req, res, next) {
     if (err) {
       throw err;
     }
+
+    res.send("debug 1: results: " + JSON.stringify(results));
 
     res.json(results);
 
