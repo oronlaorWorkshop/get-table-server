@@ -50,7 +50,7 @@ router.get('/vacant', function(req, res, next) {
 
     if (err) {
       res.send("debug 1: error: " + JSON.stringify(err));
-      throw err;
+      //throw err;
     }
 
     res.send("debug 1: results: " + JSON.stringify(results));
