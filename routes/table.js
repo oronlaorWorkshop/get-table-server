@@ -46,7 +46,7 @@ router.get('/vacant', function(req, res, next) {
     queryParams.number = req.query.number;
   }
 
-  res.send(Table);
+  res.send(typeof Table);
   Table.find(queryParams, function (err, results) {
 
     if (err) {
