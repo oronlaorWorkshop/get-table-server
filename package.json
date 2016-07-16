@@ -12,6 +12,7 @@
     "dotenv": "^2.0.0",
     "express": "~4.13.1",
     "express-list-routes": "^0.1.4",
-    "mongoose": "^4.4.17"
+    "mongoose": "^4.4.17",
+    "q": "^1.4.1"
   }
 }
