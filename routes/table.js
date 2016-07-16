@@ -75,6 +75,7 @@ router.put('/:table_id/reserve/:user_id', function (req, res, next) {
         if (err) {
           throw err;
         }
+        table.vacant = false;
         table.reserved_to = user;
         table.save(function (err) {
           if (err) {
@@ -111,6 +112,7 @@ router.post('/:table_id/free', function (req, res, next) {
         throw err;
       }
       table.vacant = true;
+      table.reserved_to = null;
       table.save(function (err) {
         if (err) {
           throw err;
