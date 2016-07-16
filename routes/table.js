@@ -4,7 +4,7 @@ var Table = require('../models/table');
 var User = require('../models/user');
 
 /*
-- get vacant - tables by lib, floor?, room? number? (number is serial for tables
+- get vacant - tables by lib, floor?, room?
 - put reserve (table_id, user_id)
  */
 
@@ -42,20 +42,11 @@ router.get('/vacant', function(req, res, next) {
     queryParams.room = req.query.room;
   }
 
-  if (req.query.number) {
-    queryParams.number = req.query.number;
-  }
-
-  var queryObject = Table.find(queryParams);
-  queryObject.exec(function (err, results) {
-    res.send("debug 2: results: " + JSON.stringify(results));
+  Table.find(queryParams, function (err, results) {
 
     if (err) {
-      res.send("debug 1: error: " + JSON.stringify(err));
-      //throw err;
+      throw err;
     }
-
-    res.send("debug 1: results: " + JSON.stringify(results));
 
     res.json(results);
 
@@ -65,46 +56,36 @@ router.get('/vacant', function(req, res, next) {
 router.put('/:table_id/reserve/:user_id', function (req, res, next) {
 
   User.findById(req.params.user_id, function (err, user) {
-    console.log("debug:1");
+
     if (err) {
-      //throw err;
-      res.send("error 1: " + JSON.stringify(err));
+      throw err;
     }
 
     if (!user) {
       res.status(400).send('user cannot be found');
     }
+
     Table.find({reserved_to: user}, function (err, tables) {
-      if (err) {
-        //throw err;
-        res.send("error 4: " + JSON.stringify(err));
-      }
+      if (err) throw err;
       if (tables.length) {
         res.status(403).send('user already reserved another table');
         return;
       }
       Table.findById(req.params.table_id, function (err, table) {
         if (err) {
-          //throw err;
-          res.send("error 2: " + JSON.stringify(err));
+          throw err;
         }
-        if (table.vacant.equals(false)) {
-          res.status(403).send('table is not vacant');
-          return;
-        }
-        res.send("debug3");
-
         table.reserved_to = user;
         table.save(function (err) {
           if (err) {
-            //throw err;
-            res.send("error 3: " + JSON.stringify(err));
+            throw err;
           }
           res.send();
         });
       });
     });
   });
+
 });
 
 router.post('/:table_id/occupy', function (req, res, next) {
