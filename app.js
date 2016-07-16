@@ -6,7 +6,12 @@ var bodyParser = require('body-parser');
 var expressListRoutes = require('express-list-routes');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://' + process.env.MONGO_HOSTNAME + '/get_table');
+
+function connectMongoose () {
+  mongoose.connect('mongodb://' + process.env.MONGO_HOSTNAME + '/get_table', function () {
+  });
+}
+connectMongoose();
 
 var routes = require('./routes/index');
 var user = require('./routes/user');
@@ -22,6 +27,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  if (mongoose.connection.readyState !== 1) {
+    connectMongoose();
+    res.status(503);
+    throw new Error('MongoDB is not available');
+  }
+  next();
+});
 
 app.use('/', routes);
 app.use('/user', user);
