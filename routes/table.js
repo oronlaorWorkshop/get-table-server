@@ -46,11 +46,16 @@ router.get('/vacant', function(req, res, next) {
     queryParams.number = req.query.number;
   }
 
-  Table.find(queryParams, function (err, results) {
+  var queryObject = Table.find(queryParams);
+  queryObject.exec(function (err, results) {
+    res.send("debug 2: results: " + JSON.stringify(results));
 
     if (err) {
-      throw err;
+      res.send("debug 1: error: " + JSON.stringify(err));
+      //throw err;
     }
+
+    res.send("debug 1: results: " + JSON.stringify(results));
 
     res.json(results);
 
@@ -60,40 +65,46 @@ router.get('/vacant', function(req, res, next) {
 router.put('/:table_id/reserve/:user_id', function (req, res, next) {
 
   User.findById(req.params.user_id, function (err, user) {
-
+    console.log("debug:1");
     if (err) {
-      throw err;
+      //throw err;
+      res.send("error 1: " + JSON.stringify(err));
     }
 
     if (!user) {
       res.status(400).send('user cannot be found');
     }
-
     Table.find({reserved_to: user}, function (err, tables) {
-      if (err) throw err;
+      if (err) {
+        //throw err;
+        res.send("error 4: " + JSON.stringify(err));
+      }
       if (tables.length) {
         res.status(403).send('user already reserved another table');
         return;
       }
       Table.findById(req.params.table_id, function (err, table) {
         if (err) {
-          throw err;
+          //throw err;
+          res.send("error 2: " + JSON.stringify(err));
         }
         if (table.vacant.equals(false)) {
           res.status(403).send('table is not vacant');
           return;
         }
+        res.send("debug3");
+
         table.reserved_to = user;
         table.save(function (err) {
           if (err) {
-            throw err;
+            //throw err;
+            res.send("error 3: " + JSON.stringify(err));
           }
           res.send();
         });
       });
     });
   });
-
 });
 
 router.post('/:table_id/occupy', function (req, res, next) {
