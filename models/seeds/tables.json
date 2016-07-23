@@ -20,17 +20,62 @@
   "number": "N2"
 }, {
   "library": "L1",
+  "floor": "F2",
+  "room": "R1",
+  "number": "N1"
+}, {
+  "library": "L1",
+  "floor": "F2",
+  "room": "R1",
+  "number": "N2"
+}, {
+  "library": "L1",
+  "floor": "F2",
+  "room": "R2",
+  "number": "N1"
+}, {
+  "library": "L1",
+  "floor": "F2",
+  "room": "R2",
+  "number": "N2"
+}, {
+  "library": "L2",
   "floor": "F1",
-  "room": "R3",
+  "room": "R1",
   "number": "N1"
 }, {
   "library": "L2",
   "floor": "F1",
+  "room": "R1",
+  "number": "N2"
+}, {
+  "library": "L2",
+  "floor": "F1",
+  "room": "R2",
+  "number": "N1"
+}, {
+  "library": "L2",
+  "floor": "F1",
+  "room": "R2",
+  "number": "N2"
+}, {
+  "library": "L2",
+  "floor": "F2",
   "room": "R1",
   "number": "N1"
 }, {
   "library": "L2",
   "floor": "F2",
   "room": "R1",
+  "number": "N2"
+}, {
+  "library": "L2",
+  "floor": "F2",
+  "room": "R2",
   "number": "N1"
+},{
+  "library": "L2",
+  "floor": "F2",
+  "room": "R2",
+  "number": "N2"
 }]

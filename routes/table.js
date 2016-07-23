@@ -95,6 +95,7 @@ router.post('/:table_id/occupy', function (req, res, next) {
       if (err) {
         throw err;
       }
+      // shouldn't we check that indeed table.vacant == false?
       table.vacant = false;
       table.save(function (err) {
         if (err) {
